@@ -1,0 +1,104 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class = "container">
+  <div class = "row">
+    <div class = "col-sm-10">
+      <h3>
+      Andrew Ng's Machine Learning Coursera: What I learned along the way.
+      </h3>
+      <p>
+      I recently completed the Anndrew Ng's Machine Learning course. I want to describe how I approached the course and what I learned.
+      </p>
+
+      <h4>
+      Backround and Approach:
+      </h4>
+      <p>
+      I started Coursera's Machine Learning course after my first year of collge, having taken two programming classes and introductory calculus.
+      The beginning of the class ran smoothly. I didn't take notes, rarely rewatched lectures, and was able to complete the first few programming assignments withouth too much hassle.
+      Then came back propogation. For the unititiated, back propogation is a technique for calculating the gradient of a cost function for a Neural Network (these concepts will be explained below).
+      Back prop turned out to be much more difficult then the previous assignments. After fiddling around with different orderings of my matrix multiplication, and running the tests again and again and again, I finally gave up.
+      6 months later, I returned to the course, having completed a semester of linear algebra. This time around, I decided to take a more methodical approach.
+      Rather then just brush over the math, I would strive for a deep understanding.
+      </p>
+     <p>
+      I found that spending time researching the math behind the core concepts presented early in the course equiped me with the neccessary conceptual tools
+      for understanding the remainder of the material. What follows are what I believe to be the most important math concepts for understanding machine learning (or at least Andrew Ng's course)
+     </p>
+     <h4>
+      1. Linear Regression
+     </h4>
+     <p>
+      The first concept introduced by Andrew is Linear Regression. Linear Regression is the process of fitting a line to a set of data points.
+      Lines are most commonly fit by minimizing <i>Mean Squared Error</i> - the average of the  square distances between observed data points and their predicted value.
+     </p>
+         <div class = "text-center">
+           <img src="{{ url_for('static', filename ='linReg.png') }}", class = "img-fluid" alt="Line of Best fit, courtesy of freeCodeCamp", width = "500">
+           <img src="{{ url_for('static', filename ='mse.png') }}", class = "img-fluid" alt="Mean Squared Error Formula">
+         </div>
+      <p>
+      In my first pass through the course, I didn't question <i>why</i> this formula was used. I understood that we wanted to minimize the distance between each data point and its predicted value, but why use mean squred error rather than, say,
+      mean absolute error (the average of the absolute values of the distances between the data and the line).
+      </p>
+      <p>
+      After doing some reseach, I learned that if we assume that the data in linear, independant, and obeys the normal distribution, then mimimizing MSE equates to maximizing the likelyhood that our parametes are correct (in 2D our slope and intercept).
+      </p>
+
+      Let me briefly explain each of these assumptions, and then show how we can maximize the likelyhood of our line being the correct one.
+      <ul>
+        <li>Linear: As we vary the independant variable, the dependant variable changes at a constant rate. Geometrically, this means a line is the best way to predict the data.</li>
+        <li>Independant: One data point does not effect another. Think flipping a coin: getting heads does not change the likelyhood of getting tails on the next flip.</li>
+        <li>Normal Distribution: At every independant or 'x' variable, the distribution of the dependant or 'y' variables is normal.</li>
+      </ul>
+      <p>
+      Here is a graph of what the distribution of this kind of data might look like:
+      </p>
+      <div class = "text-center">
+        <img src="{{ url_for('static', filename ='normDistGraph.png') }}", class = "img-fluid" alt="Graph of normally distributioned, linear, independant variable", width = 1000>
+      </div>
+      <p>
+      Under these assumptions, we can now compute the likelyhood of our parameters.
+      </p>
+      <p>
+      By using the normal distribution, and assumping the distribution is centered on our line of best fit, we can calculate the probaility of observing each of our data points.
+      This probability is equivalent to the likelyhood that our line actually reflects the distribution of the data.
+      </p>
+      <p>
+      Using the normal distribution, the probability of observing x is given by
+      </p>
+      <div class = "text-center">
+        <img src="{{ url_for('static', filename ='normalDist.png') }}", class = "img-fluid" alt="Equation for normal distribution", width = 300>
+      </div>
+      Since we assumed each data point is independant, we can calculate the probability of observing all of them, or the <b>Joint Probability</b>,
+      by taking the product of the probability of observing each of them. Remember, this joint probability is the same as the likelyhood that our parameters &theta; are the true "population" parameters.
+      Thus, we express the likelyhood of &theta; as
+      <div class = "text-center">
+        <img src="{{ url_for('static', filename ='likelyhoodEquation.png') }}", class = "img-fluid" alt="Equation for normal distribution", width = 300>
+      </div>
+      <p>
+      Notice that we replaced x with y<sub>i</sub> and mu with &theta;x<sub>i</sub>. This comes from the assumption that the normal distribution is centered on our line, given by  y = &theta;x<sub>i</sub>
+      </p>
+      <p>
+      We want to maximize this function. To make this probelm easier, we can take the log of both sides. Since log is monotonic, i.e. preserves the oder of the function, this will not change the result.
+      Removing constants, we get:
+      </p>
+      <div class = "text-center">
+        <img src="{{ url_for('static', filename ='logOfJointDist.png') }}", class = "img-fluid" alt="log of joint distribution", width = 300>
+      </div>
+      After removing constant terms, we are left with the negative MSE. Thus to maximize this function, we can mimizize MSE.
+      <div class = "text-center">
+        <img src="{{ url_for('static', filename ='minCost.png') }}", class = "img-fluid" alt="minimize mean squared error", width = 250>
+      </div>
+      And now we're left with an optimization objective that is nearly identical to the first cost function introudced in Andrew Ng's course
+      <div class = "text-center">
+        <img src="{{ url_for('static', filename ='AndrewNgCostFunction.png') }}", class = "img-fluid" alt="Cost Function from Andrew Ng's course", height = 100>
+      </div>
+      We now understand why MSE is used so often to fit a line to data. In the next section, we'll discuss how to miminze MSE and other "loss" functions.
+    </div>
+    <h4>2. Finding minima: Gradient Descent and the Normal Equation </h4>
+    TODO: coming soon
+    <div class = "col-sm-2"> foo </div>
+  </div>
+</div>
+
+{% endblock %}
