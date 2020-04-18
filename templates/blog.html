@@ -2,17 +2,17 @@
 {% block content %}
 <div class = "container">
   <div class = "row">
-    <div class = "col-sm-10">
-      <h3>
+    <div class = "col-sm-10", id = 'Andrew Ng: What I learned along the way'>
+      <h2>
       Andrew Ng's Machine Learning Coursera: What I learned along the way.
-      </h3>
+      </h2>
       <p>
       I recently completed the Anndrew Ng's Machine Learning course. I want to describe how I approached the course and what I learned.
       </p>
 
-      <h4>
+      <h3>
       Backround and Approach:
-      </h4>
+      </h3>
       <p>
       I started Coursera's Machine Learning course after my first year of collge, having taken two programming classes and introductory calculus.
       The beginning of the class ran smoothly. I didn't take notes, rarely rewatched lectures, and was able to complete the first few programming assignments withouth too much hassle.
@@ -94,10 +94,28 @@
         <img src="{{ url_for('static', filename ='AndrewNgCostFunction.png') }}", class = "img-fluid" alt="Cost Function from Andrew Ng's course", height = 100>
       </div>
       We now understand why MSE is used so often to fit a line to data. In the next section, we'll discuss how to miminze MSE and other "loss" functions.
+
+      <h4>2.Finding minima: Gradient Descent and the Normal Equation </h4>
+      <p>
+      When minimizing a function, we can generally take two approaches: analytical and algorithmic. Those familiar with calculus will recognize the analytical method: take the derivitive of a function, set it equal to 0, find the roots, and analyze their behaivor near the origin.
+      MSE happens to lend itself well to this approach. Employing what's known as the normal equation, we can ...TODO: go over normal equation, and derivation of gradient
+
+      However, while MSE works well for linear regression, other models will use other loss functions- functions that won't lend themselves to anaytical methods. Thus, we will need take an algorithmic approach, using what's known as gradient descent.
+      This algorithm starts in the same way, by taking the derivitive of our cost function with respect to our function paramaters. For real valued functions, we call this the gradient. An interesting property of the gradient vector is that it points in the direction of greatest increase.
+      TODO: insert image:
+      But remember, we want to minimize our cost function. We can do this by subtracting the gradient from our existing parameters, moving in the direction of greatest decrease. To keep moving down the cost function, we continue this process. And that's the core of gradient descent.
+      With only a few more concepts, we'll have the tools to train a neural network to classify hand drawn numbers! But first we have to learn how to classify.
+      </p>
+      <h4>3.Classification using Logistic Regression</h4>
+      <p>
+        TODO: go over logistic regression: go over maximum likelyhood derivation of logstic regeression cost function usign logit
+      </p>
+      <h4>4.Putting tools together to build a Neural Network</h4>
+      <h5>5.How to train a Neural Network with Back Propogation</h5>
+      <h6>6.Some closing thing</h6>
     </div>
-    <h4>2. Finding minima: Gradient Descent and the Normal Equation </h4>
-    TODO: coming soon
-    <div class = "col-sm-2"> foo bar </div>
+
+    <div class = "col-sm-2"></div>
   </div>
 </div>
 
